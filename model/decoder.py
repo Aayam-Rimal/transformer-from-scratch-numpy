@@ -39,7 +39,19 @@ class decoder_block:
         x = x + z3
         x = self.ln3.norm(x)
 
-        return x
+        return z,x
+    
+
+if __name__=="__main__":
+    tgt= np.random.randn(1,4,6)
+    encoder_out= np.random.randn(1,4,6)
+    block1= decoder_block(6,12,1,eps=1e-5)
+
+    z1,x1= block1.forward(tgt,encoder_out)
+
+    print(z1)
+
+
 
 
 

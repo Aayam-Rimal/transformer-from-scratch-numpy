@@ -2,31 +2,37 @@ import numpy as np
 from encoder import encoder_block
 from decoder import decoder_block
 
-class transformer:
+class EncoderStack:
 
-    def __init__(self,d_model, num_heads, d_ff,eps=1e-5):
+    def __init__(self,layers):
+
+        self.layers= layers
         
-        self.encoder= encoder_block(d_model, num_heads,d_ff,eps)
-        self.decoder= decoder_block(d_model,d_ff,num_heads,eps)
-        self.eps= eps
+    def forward(self,x):
 
-    def forward(self,trgt,src):
-
-        enc_out = self.encoder.forward(src)
-        dec_out= self.decoder.forward(trgt,enc_out)
-
-        return dec_out
+        for layer in self.layers:
+            x= layer.forward(x)
+        return x
     
 
-if __name__ == "__main__":
+class DecoderStack:
 
-    src= np.random.randn(1,5,8)
-    trgt=np.random.randn(1,5,8)
-    t1= transformer(8,1,16,eps=1e-5)
+    def __init__(self,layers):
+        
+        self.layers= layers
 
-    output= t1.forward(trgt,src)
+    def forward(self,x):
 
-    print(output)
+        for layer in self.layers:
+            x= layer.forward(x)
+
+        return x 
+
+
+
+    
+
+
 
 
 
