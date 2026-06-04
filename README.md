@@ -30,6 +30,14 @@ The data modules present a minimal pipeline that demonstrates shape and batching
 This design is intended as a teaching scaffold. For production or training at scale, the conceptual components in data/ would typically be replaced by a PyTorch `Dataset`, `DataLoader`, and collate function producing tensors.
 
 
+## What I learned
+
+- How scaled dot-product attention is computed
+- Why masking is required in the decoder
+- How residual connections and layer normalization interact
+- The complexity of managing tensor dimensions across multiple heads
+
+
 ## Quick smoke tests
 
 Several model files include small `__main__` examples that run forward passes. From the repository root, the examples can be run directly, for example:
